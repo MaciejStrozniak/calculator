@@ -60,8 +60,8 @@ class Calculator {
     const stringNumber = number.toString();
     const integerDigits = parseFloat(stringNumber.split('.')[0]);
     const decimalDigits = stringNumber.split('.')[1];
-
     let integerDisplay;
+
     if (isNaN(integerDigits)) {
        integerDisplay = ''
     } else {
@@ -74,10 +74,6 @@ class Calculator {
     } else {
       return integerDisplay;
     }
-
-    const floatNumber = parseFloat(number);
-    if (isNaN(floatNumber)) return '';
-    return floatNumber.toLocaleString('en');
   }
 
   updateDisplay(){
@@ -89,7 +85,6 @@ class Calculator {
     } else {
       this.previousOperandTextElement.innerText = '';
     }
-    // this.previousOperandTextElement.innerText = this.previousOperand;
   }
 }
 
