@@ -6,9 +6,9 @@ class Calculator {
   }
 
   clear() {
+    this.operation = undefined;
     this.currentOperand = 'Current';
     this.previousOperand = 'Previous';
-    this.operation = undefined;
   }
 
   appendNumber(number) {
@@ -18,7 +18,7 @@ class Calculator {
   }
 
   delete() {
-
+    this.currentOperand = this.currentOperand.toString().slice(0, -1);
   }
 
   chooseOperation(operation) {
@@ -58,10 +58,62 @@ class Calculator {
     this.previousOperand = '';
   }
 
-  updateDisplay() {
-    this.currentOperandTextElement.innerText = this.currentOperand;
-    this.previousOperandTextElement.innerText = this.previousOperand;
+// -------------------------------------- KOD DO POPRAWY ----------------------------------------
+  // getDisplayNumber(number) {
+  //   const stringNumber = number.toString();
+  //   const integerNumber = parseFloat(stringNumber.split('.')[0]);
+  //   const decimalNumber = stringNumber.split('.')[1];
+  //   let integerDisplay;
+  //
+  //   if (isNaN(integerNumber)) {
+  //     integerDisplay = '';
+  //   } else {
+  //     integerNumber.toLocaleDateString('pl', {maximumFractionDigits: 0});
+  //   }
+  //
+  //   if (decimalNumber != null) {
+  //     return `${integerDisplay}.${decimalNumber}`;
+  //   } else {
+  //     return integerDisplay;
+  //   }
+  // }
+
+  getDisplayNumber(number) {
+    const stringNumber = number.toString();
+    const integerDigits = parseFloat(stringNumber.split('.')[0]);
+    const decimalDigits = stringNumber.split('.')[1];
+    let integerDisplay;
+
+    if (isNaN(integerDigits)) {
+       integerDisplay = ''
+    } else {
+      integerDisplay =
+        integerDigits.toLocaleString('pl', {maximumFractionDigits: 0});
+    }
+
+    if (decimalDigits != null) {
+      return `${integerDisplay}.${decimalDigits}`
+    } else {
+      return integerDisplay;
+    }
   }
+
+  updateDisplay(){
+    this.currentOperandTextElement.innerText =
+      this.getDisplayNumber(this.currentOperand);
+    if (this.operation != null) {
+      this.previousOperandTextElement.innerText =
+        `${this.previousOperand} ${this.operation}`;
+    } else {
+      this.previousOperandTextElement.innerText = '';
+    }
+  }
+
+  // updateDisplay() {
+  //   this.currentOperandTextElement.innerText = this.currentOperand;
+  //   if (this.operation != undefined)
+  //   this.previousOperandTextElement.innerText = `${this.previousOperand} ${this.operation}`;
+  // }
 }
 
 const numberButtons = document.querySelectorAll('[data-number]');
@@ -95,5 +147,10 @@ equalsButton.addEventListener('click', () => {
 
 allClearButton.addEventListener('click', () => {
   calculator.clear();
+  calculator.updateDisplay();
+});
+
+deleteButton.addEventListener('click', () => {
+  calculator.delete();
   calculator.updateDisplay();
 });
