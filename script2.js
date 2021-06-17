@@ -22,36 +22,38 @@ class Calculator {
   }
 
   chooseOperation(operation) {
-    if (this.currentOperand === '') return;
+    if (this.currentOperand === 'Current') return;
     if (this.previousOperand != '') {
       this.compute();
     }
     this.operation = operation;
     this.previousOperand = this.currentOperand;
-    this.currentOperand = '';
+    this.currentOperand = ''
   }
 
   compute() {
-    let computing;
-    const prev = parseFloat(this.previousOperand);
+    let computation;
     const current = parseFloat(this.currentOperand);
+    const prev = parseFloat(this.previousOperand);
+    if (isNaN(current) || isNaN(prev)) return;
     switch(this.operation){
       case '+':
-        computing = prev + current;
+        computation = prev + current;
         break;
       case '-':
-        computing = prev - current;
+        computation = prev - current;
         break;
       case '*':
-        computing = prev * current;
+        computation = prev * current;
         break;
       case '÷':
-        computing = prev / current;
+        computation = prev / current;
         break;
       default:
         return;
     }
-    this.currentOperand = computing;
+
+    this.currentOperand = computation;
     this.operation = undefined;
     this.previousOperand = '';
   }
