@@ -58,26 +58,6 @@ class Calculator {
     this.previousOperand = '';
   }
 
-// -------------------------------------- KOD DO POPRAWY ----------------------------------------
-  // getDisplayNumber(number) {
-  //   const stringNumber = number.toString();
-  //   const integerNumber = parseFloat(stringNumber.split('.')[0]);
-  //   const decimalNumber = stringNumber.split('.')[1];
-  //   let integerDisplay;
-  //
-  //   if (isNaN(integerNumber)) {
-  //     integerDisplay = '';
-  //   } else {
-  //     integerNumber.toLocaleDateString('pl', {maximumFractionDigits: 0});
-  //   }
-  //
-  //   if (decimalNumber != null) {
-  //     return `${integerDisplay}.${decimalNumber}`;
-  //   } else {
-  //     return integerDisplay;
-  //   }
-  // }
-
   getDisplayNumber(number) {
     const stringNumber = number.toString();
     const integerDigits = parseFloat(stringNumber.split('.')[0]);
